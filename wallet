@@ -1,0 +1,10 @@
+let ethers = require('ethers');
+let fs = require('fs');
+let ValidKeys = /^([A-F a-f 0-9])\1{6}/;
+while (true) {
+    let wallet = ethers.Wallet.createRandom();
+    if (ValidKeys.test(wallet.address.toLowerCase().substr(2, 7)) || ValidKeys.test(wallet.address.toLowerCase().substr(35, 7))) {
+        console.log(wallet.address.toLowerCase());
+        fs.appendFileSync('./7.txt', wallet.address + "----" + wallet.privateKey + "----" + wallet.mnemonic.phrase + '\n')
+    }
+};
